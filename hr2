@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static int find_gcd(int first,int second)
+    {
+        if(second==0)
+        {
+            return first;
+        }
+        return find_gcd(second,first%second);
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int no=sc.nextInt();
+        int first=sc.nextInt();
+        for(int i=1;i<no;i++)
+        {
+            int second=sc.nextInt();
+            first=find_gcd(first,second);
+        }
+        System.out.println(first);
+    }
+}
