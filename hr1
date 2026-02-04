@@ -1,0 +1,47 @@
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int m=sc.nextInt();
+        int n=sc.nextInt();
+        boolean foundprime=false;
+        
+        for(int i=m;i<=n;i++)
+        {
+            if(i<2)
+            {
+                continue;
+            }
+            boolean prime=true;
+            for(int j=2;j<i;j++)
+            {
+            if(i%j==0)
+            {
+                prime=false;
+                break;
+            }
+            }
+        
+            if(prime)
+            {
+            
+            System.out.print(i+" ");
+                foundprime=true;
+            }
+        }
+            if(!foundprime)
+            {
+               System.out.println("Nothing");
+            }
+            
+        }
+        
+        
+        
+    }
+    
