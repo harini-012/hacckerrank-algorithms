@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        ArrayList<Integer>arr=new ArrayList<>();
+        int n=sc.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            if(n%i==0)
+            {
+                arr.add(i);
+            }
+            
+        }
+        ArrayList<Integer>primelist=new ArrayList<>();
+        for(int i=0;i<arr.size();i++)
+        {
+            boolean prime=true;
+            int factor=arr.get(i);
+            if(factor<2)
+            {
+                continue;
+            }
+            for(int j=2;j<factor;j++)
+            {
+                if(factor%j==0)
+                {
+                    prime=false;
+                }
+                
+            }
+        
+            if(prime)
+            {
+                primelist.add(factor);
+            }
+        }
+           int temp=n;
+            for(int k=0;k<primelist.size();k++)
+            {
+                int p=primelist.get(k);
+                while(temp%p==0)
+                {
+                    System.out.print(p+" ");
+                    temp=temp/p;
+                }
+            }
+        }
+    }
