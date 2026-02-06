@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    public static int  find_gcd(int a,int b)
+    {
+        if(b==0)
+        {
+            return a;
+        }
+        return find_gcd(b,a%b);
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        ArrayList<Integer>arr=new ArrayList<>();//4 3 6 
+        ArrayList<Integer>divide=new ArrayList<>();//8 2 6 10
+
+        for(int i=0;i<n;i++)
+        {
+            int value=sc.nextInt();
+            arr.add(value);
+        }
+        for(int i=0;i<m;i++)
+        {
+            int value1=sc.nextInt();
+            divide.add(value1);
+        }
+        int gcd=divide.get(0);//8
+        for(int i=1;i<divide.size();i++)//1//2//3
+        {
+            gcd=find_gcd(gcd,divide.get(i));//find_gcd(8,2)=2//find_gcd(2,6)=2//find_gcd(2,10)=2
+        }
+        Collections.sort(arr);//3 4 6
+        int deletions=0;//0
+        boolean found=false;
+        for(int i=0;i<arr.size();i++)//0
+        {
+            int x=arr.get(i);//x=3//4//6
+            if(gcd%x==0)//2%3!=0//2%4!=0//6%2=0
+            {
+                deletions=i;//2
+                found=true;//true
+                break;
+            }
+        }
+        if(found)
+        {
+            System.out.println(deletions);//2
+        }
+        else
+        {
+            System.out.println(-1);
+        }
+        
+      
+    }
+}
