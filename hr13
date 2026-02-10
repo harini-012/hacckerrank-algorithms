@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        String s1=sc.nextLine();//abcdefg
+        int k=sc.nextInt();//2
+        int n=s1.length();//7
+        String reversed="";
+        for(int i=0;i<n;i+=2*k)//0//4
+        {
+            int start = Math.min(i + k - 1, n - 1);//min(1,6)=1//min(5,6)=5
+            String part1="";
+            for(int j=start;j>=i;j--)//1//0//5//4
+            {
+                part1+=s1.charAt(j);//b//ba//baf//bafe
+            }
+            String part2="";//
+            for(int j=i+k;j<i+2*k&&j<n;j++)//2 2<4//3 3<4//6 6<10
+            {
+                part2+=s1.charAt(j);//c//cd//cdg
+            }
+            reversed+=part1+part2;//bacd//bacdfeg
+        }
+        System.out.println(reversed);
+    }
+}
