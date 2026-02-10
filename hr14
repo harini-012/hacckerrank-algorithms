@@ -1,0 +1,36 @@
+import java.util.*;
+public class Solution
+{
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        String line=sc.nextLine();
+        String[]parts=line.split(" ");
+        int n=parts.length;
+        int[]arr=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=Integer.parseInt(parts[i]);
+            
+            
+        }
+        int k=sc.nextInt();
+        k=k%n;
+        int[]result=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            result[(i+k)%n]=arr[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(result[i]);
+            if(i<n-1)
+            {
+                System.out.print(" ");
+            }
+        }
+        
+        
+        
+    }
+}
