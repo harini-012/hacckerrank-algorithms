@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();//5
+        int[]arr=new int[n];//45 23 89 12 67//12 23 89 45 67//12 23  45  89 67//12 23 45 67 89
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        for(int i=0;i<n-1;i++)//0//1//2//3
+        {
+            int minimum_index=i;//0//1//2//3//4
+            for(int j=i+1;j<n;j++)//1//2//3//4  //2//3//4  //3//4 //4
+            {
+                if(arr[j]<arr[minimum_index])//23<45//89<23//12<23//67<12//89<23//45<23//67<23 //45<89//67<45//89<45//67<89
+                {
+                    minimum_index=j;//1//3  //3 //4
+                }
+            }
+        
+        
+        if(minimum_index!=i)//3!=0//3!=2//4!=3
+        {
+            int temp=arr[minimum_index];//temp=12//temp=45//temp=67
+            arr[minimum_index]=arr[i];//arr[3]=arr[0]//arr[3]=arr[2]//arr[4]=arr[3]
+            arr[i]=temp;//arr[0]=12//arr[2]=67//arr[2]=45//arr[3]=67
+        }
+
+        }
+    for(int i=0;i<n;i++)
+    {
+        System.out.print(arr[i]+" ");//12 23 45 67 89
+    }
+}
+}
