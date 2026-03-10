@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static void mergeSort(int[]arr,int l,int r)//50 40 70 60 30,0,4//50 40 70 60 30,0,2//50 40 70 60 30,0,1
+    {
+        if(l<r)
+        {
+            int m=(l+r)/2;//2//1//0
+            mergeSort(arr,l,m);//mergeSort(arr,0,2)//mergeSort(arr,0,1)//megeSort(arr,0,0)--termingate
+            mergeSort(arr,m+1,r);//mergeSort(arr,3,4)//mergeSort(arr,2,2)//mergeSort(arr,1,1)
+            merge(arr,l,m,r);//merge(arr,0,0,1)
+        }
+    }
+    static void merge(int[]arr,int l,int m,int r)//merge(arr,0,0,1)//merge(arr,0,1,2)
+    {
+        int i=l;//0//1  //0//1//2
+        int j=m+1;//1//2  //2
+        int k=0;//0//1//2  //0//1//2
+        int[]temp=new int[r-l+1];//40 50 //40 50
+        while(i<=m&&j<=r)
+        {
+            if(arr[i]<arr[j])//50<40  //40<70 //50<70
+            {
+                temp[k++]=arr[i++];  //temp[0]=arr[0 ]//temp[1]=arr[1]
+            }
+            else
+            {
+                temp[k++]=arr[j++];//temp[0]=arr[1] //temp[2]=arr[2]
+            }
+        }
+            while(i<=m)
+            {
+                temp[k++]=arr[i++];//temp[1]=arr[0]
+            }
+        while(j<=r)
+            {
+                temp[k++]=arr[j++];
+            }
+             for (int x=0; x<temp.length;x++)//0//1
+             {
+            arr[l + x] = temp[x];//arr[0]=temp[0]//arr[1]=temp[1]//
+             }
+        //new arr= 40 50 70 60 20
+            
+        }
+    
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]arr=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        mergeSort(arr,0,n-1);
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+        
+    }
+}
