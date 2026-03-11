@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int m=sc.nextInt();//3
+        int n=sc.nextInt();//3
+        int[]inventory1=new int[m+n];//1 2 3 0 0 0
+        int[]inventory2=new int[n];//2 5 6
+
+        for(int i=0;i<m+n;i++)
+        {
+            inventory1[i]=sc.nextInt();
+        }
+        for(int i=0;i<n;i++)
+        {
+            inventory2[i]=sc.nextInt();
+        }
+        int i=m-1;//2//1
+        int j=n-1;//2//1//0
+        int k=m+n-1;//5//4//3//2
+        while(i>=0 && j>=0)//2>=0 2>=0
+        {
+            if(inventory1[i]>inventory2[j])
+            {
+                inventory1[k--]=inventory1[i--];
+            }
+            else
+            {
+                inventory1[k--]=inventory2[j--];
+            }
+        }
+        while(j>=0)
+        {
+            inventory1[k--]=inventory2[j--];
+        }
+        for(int num:inventory1)
+        {
+            System.out.print(num+" ");
+        }
+    }
+}
