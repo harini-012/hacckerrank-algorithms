@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]arr=new int[n];//6
+        for(int i=0;i<n;i++)//2 0 2 1 1 0
+
+        {
+            arr[i]=sc.nextInt();
+        }
+        int low=0;//0
+        int mid=0;//0
+        int high=n-1;//5
+        while(mid<=high)
+        {
+            if (arr[mid]==0)
+            {
+                int temp=arr[low];//0
+                arr[low]=arr[mid];//0
+                arr[mid]=temp;//0
+                low++;//1//2
+                mid++;//1//2
+            }
+            else if(arr[mid]==1)
+            {
+                mid++;//3//4
+            }
+            //0 0 2 1 1 2//0 0 1 1 2 2
+            else
+            {
+                int temp=arr[mid];//2//2
+                arr[mid]=arr[high];//arr[0]=arr[5]//arr[2]=arr[4]
+                arr[high]=temp;//arr[5]=2//arr[4]=2
+                high--;//4//3
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+    }
+}
