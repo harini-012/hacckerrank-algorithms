@@ -1,0 +1,70 @@
+import java.io.*;
+import java.util.*;
+/*
+4
+a 4 20
+b 1 10
+c 1 40
+d 1 30
+*/
+/*
+Sorted
+c 1 40
+d 1 30
+a 4 20
+b 1 10
+
+We want to consider the deadline also
+*/
+public class Solution 
+{
+    static class Job
+    {
+        String id;
+        int deadline;
+        int profit;
+        Job(String i,int dead,int pro)
+        {
+            id=i;
+            deadline=dead;
+            profit=pro;
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        Job[]jobs=new Job[n];
+        for(int i=0;i<n;i++)
+        {
+            String id=sc.next();
+            int deadline=sc.nextInt();
+            int profit=sc.nextInt();
+            jobs[i]=new Job(id,deadline,profit);
+        }
+        Arrays.sort(jobs,(a,b)->b.profit-a.profit);//sorting if +ve swap if negative not swap
+        int maxDeadline=0;//0//1//4//1
+        for(Job j:jobs)//c 1 40//d 1 30//a 4 30//b 1 30
+        {
+            maxDeadline=Math.max(maxDeadline,j.deadline);//0,1=1//1,1=1//1,4=4
+            
+        }
+        boolean[]slot=new boolean[maxDeadline+1];//slot[5]=[true,false,false,false,true]
+        int jobCount=0;//0
+        int totalProfit=0;//0
+        for(Job j:jobs)//c 1 40//d 1 30//a 4 20//b 1 10
+        {
+            for(int d=j.deadline;d>0;d--)//1 1>0 0//1 1>0//4>0//1>0
+            {
+                if(!slot[d])//!slot[1]=!False=true//!true=false//slot[4]=false !false=true//slot[1]=true !true=false--terminated
+                {
+                    slot[d]=true;//slot[1]=true//slot[4]=true
+                    jobCount++;//1//2
+                    totalProfit+=j.profit;//0+40=40//40=40+20=60
+                    break;//break//break
+                }
+            }
+        }
+        System.out.println(jobCount+" "+totalProfit);//2 60
+    }
+}
