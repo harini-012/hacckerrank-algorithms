@@ -1,0 +1,80 @@
+import java.io.*;
+import java.util.*;
+/*
+2
+1 2
+2
+3 4
+*/
+public class Solution 
+{
+    public static double findMedian(int[]a,int[]b)
+    {
+        if(a.length>b.length)//2>2--no
+        {
+            return findMedian(b,a);
+        }
+        int m=a.length;//2
+        int n=b.length;//2
+        int low=0;//0
+        int high=m;//2
+        while(low<=high)//0<=2//2<=2
+        {
+            int i=(low+high)/2;//1//2
+            int j=(m+n+1)/2-i;//1//0
+            int left1=(i==0)?Integer.MIN_VALUE:a[i-1];//min[a[0]]=1//min[a[1]]=2
+            int right1=(i==m)?Integer.MAX_VALUE:a[i];//min[a[1]]=2//infinity
+            int left2=(j==0)?Integer.MIN_VALUE:b[j-1];//min[b[0]]=3//-infinity
+            int right2=(j==n)?Integer.MAX_VALUE:b[j];//min[b[1]]=4//3
+            if(left1<=right2 && left2<=right1)
+            {
+                if((m+n)%2==0)
+                {
+                    return (Math.max(left1,left2)+Math.min(right1,right2))/2.0;//2+3/2=2.5
+                    
+                
+                }
+                else
+                {
+                    return Math.max(left1,left2);
+                }
+            }
+                if(left1>right2)
+                {
+                high=i-1;
+                }
+                else
+                {
+                    low=i+1;//2
+                }
+        }
+               
+            
+             return 0;
+
+
+        
+    }
+    public static void main(String[] args) 
+    {
+        
+        Scanner sc=new Scanner(System.in);
+        int n1=sc.nextInt();
+        int[]arr1=new int[n1];
+        for(int i=0;i<n1;i++)
+        {
+            arr1[i]=sc.nextInt();
+        }
+        int n2=sc.nextInt();
+        int[]arr2=new int[n2];
+         for(int i=0;i<n2;i++)
+        {
+            arr2[i]=sc.nextInt();
+        }
+        double median=findMedian(arr1,arr2);
+        
+        System.out.printf("%.5f",median);
+        
+        
+    }
+}
