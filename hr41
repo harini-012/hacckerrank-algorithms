@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static class Activities 
+    {
+        int start,end;
+        Activities(int s,int e)
+        {
+            start=s;
+            end=e;
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        Activities[]act=new Activities[n];
+        for(int i=0;i<n;i++)
+        {
+            int s=sc.nextInt();
+            int e=sc.nextInt();
+            act[i]=new Activities(s,e);
+            
+        }//for
+        Arrays.sort(act,Comparator.comparingInt(a->a.end));
+        int lastEnd=0;
+        int count=0;
+        for(Activities a:act)
+        {
+            if(a.start>=lastEnd)
+            {
+                count++;
+                lastEnd=a.end;
+                
+            }
+        }
+        System.out.println(count);
+    }
+}
