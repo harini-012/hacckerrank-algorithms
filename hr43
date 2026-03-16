@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static class Item
+    {
+        int value,weight;
+        double ratio;
+        Item(int v,int w)
+        {
+            value=v;
+            weight=w;
+            ratio=(double)v/w;
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int capacity=sc.nextInt();
+        Item[]items=new Item[n];
+        for(int i=0;i<n;i++)
+        {
+            int v=sc.nextInt();
+            int w=sc.nextInt();
+            items[i]=new Item(v,w);
+            
+        }
+        Arrays.sort(items,(a,b)->Double.compare(b.ratio,a.ratio));
+        double total=0.0f;
+        int remaining=capacity;
+        for(int i=0;i<n;i++)
+        {
+            if(remaining>=items[i].weight)
+            {
+                total+=items[i].value;
+                remaining-=items[i].weight;
+            }
+            else
+            {
+                total+=items[i].ratio*remaining;
+                break;
+            }
+        }
+        System.out.printf("%.2f",total);
+    }
+}
