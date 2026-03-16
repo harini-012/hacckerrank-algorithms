@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int amount=sc.nextInt();
+        if(amount==0)
+        {
+            System.out.println("Amount should be greater than 0");
+            sc.close();
+            return;
+        }
+        int[]denominations={2000, 500, 200, 100, 50, 20, 10, 5, 2, 1};
+        int total=0;
+        for(int note:denominations)
+        {
+            if(amount>=note)
+            {
+                int count=amount/note;
+                amount-=count*note;
+                System.out.println(note+" : "+count);
+                total+=count;
+            }
+            
+        }
+        
+        
+        
+        System.out.println(total);
+        
+    }
+}
