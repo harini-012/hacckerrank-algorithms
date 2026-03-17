@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static int findMax(int num) {
+        char[] digits = Integer.toString(num).toCharArray();
+        int n = digits.length;
+
+        // Store last occurrence of each digit
+        int[] last = new int[10];
+        for (int i = 0; i < n; i++) {
+            last[digits[i] - '0'] = i;
+        }
+
+        // Try to swap
+        for (int i = 0; i < n; i++) {
+            for (int d = 9; d > digits[i] - '0'; d--) {
+                if (last[d] > i) {
+                    // Swap
+                    char temp = digits[i];
+                    digits[i] = digits[last[d]];
+                    digits[last[d]] = temp;
+
+                    return Integer.parseInt(new String(digits));
+                }
+            }
+        }
+
+        return num;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        System.out.println(findMax(num));
+    }
+}
