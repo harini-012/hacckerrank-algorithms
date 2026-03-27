@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+/*
+5
+5 3 4 11 2
+*/
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]arr=new int[n];
+        int sum=0;
+        for (int i=0;i<n;i++)
+        {
+            int e=sc.nextInt();
+            arr[i]=e;
+        }
+        if(n==1)
+        {
+            System.out.println(arr[0]);
+            return ;
+        }
+        int[]dp=new int[n];//[0,0,0,0,0]
+        dp[0]=arr[0];//[5,5,9,16,16]
+        dp[1]=Math.max(arr[0],arr[1]);//5
+        for(int i=2;i<n;i++)//2//3//4
+        {
+            int take=arr[i]+dp[i-2];//4+5=9//11+5=16//2+9=11
+            int skip=dp[i-1];//5//9//16
+            if(skip>take)
+            {
+                dp[i]=skip;
+            }
+            else
+            {
+                dp[i]=take;//9//16
+            }
+        }
+        System.out.println(dp[n-1]);
+}
+}
