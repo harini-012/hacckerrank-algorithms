@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+/*
+    G X T X A Y B
+  ----------------
+ 0|0 0 0 0 0 0 0 0
+A |0
+G |0
+G |0
+T |0
+A |0
+B |0
+*/
+public class Solution 
+{
+    public static int lcs(String str1,String str2)//AGGTAB  //GXTXAYB
+    {
+        int n=str1.length();//6
+        int m=str2.length();//7
+        int[][]dp=new int[n+1][m+1];//7 8
+        for(int i=1;i<=n;i++)//1
+        {
+            for(int j=1;j<=m;j++)//1//2//3
+            {
+                if(str1.charAt(i-1)==str2.charAt(j-1))//A==G--no//G==X--no
+                {
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else
+                {
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);//dp[1][1]=max(0,0)=0//0
+                }
+            }
+        }
+        return dp[n][m];
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        String str1=sc.nextLine();//AGGTAB
+
+        String str2=sc.nextLine();//GXTXAYB
+        System.out.println(lcs(str1,str2));
+    }
+}
