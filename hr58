@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int minCoinsRequired(int[]coins,int amount)
+    {
+        int max=amount+1;
+        int[]dp=new int[max];
+        Arrays.fill(dp,max);
+        dp[0]=0;
+        for(int current=1;current<=amount;current++)
+        {
+           for(int coin:coins)
+           {
+               if(current-coin>=0)
+               {
+                   dp[current]=Math.min(dp[current],dp[current-coin]+1);
+                   
+               }
+           }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int target=sc.nextInt();
+        int[]coins=new int[n];
+        int[]dp=new int[target+1];
+        dp[0]=1;
+        for(int i=0;i<n;i++)
+        {
+            coins[i]=sc.nextInt();
+        }
+        int minCoins=minCoinsRequired(coins,target);
+        System.out.println(minCoins);
+        
+    }
+}
