@@ -1,0 +1,60 @@
+/*
+4
+1 2 50
+3 5 20
+6 19 100
+2 100 200
+
+Sorted based on end time
+1 2 50
+3 5 20
+6 19 100
+2 100 200
+
+
+*/
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+
+    public static void main(String[] args) 
+    {
+         Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[][]jobs=new int[n][3];
+        for(int i=0;i<n;i++)
+        {
+            jobs[i][0]=sc.nextInt();
+            jobs[i][1]=sc.nextInt();
+            jobs[i][2]=sc.nextInt();
+        }
+        Arrays.sort(jobs,(a,b)->a[1]-b[1]);//sorting based on end time
+        int[]dp=new int[n];//dp=[_,_,_,_]
+        dp[0]=jobs[0][2];//50 intially//dp=50,_,_,_//dp=50,70,_,_//dp=50,70,170//dp=50,70,170,250
+        for(int i=1;i<n;i++)//1//2//3
+        {
+            int profit=jobs[i][2];//profit=jobs[1][2]=20//profit=jobs[2][2]=100//jobs[3][2]=200
+            int last=-1;//-1//-1//-1
+            for(int j=i-1;j>=0;j--)//0>=0//-1>=0--no//1//2//1//0
+            {
+                if(jobs[j][1]<=jobs[i][0])//jobs[0][1]=2<=jobs[1][0]=3--yes//jobs[1][1]=5<=jobs[2][0]=6//jobs[2][1]=19<=jobs[3][0]=2---no//jobs[1][1]=5<=jobs[3][0]=2--no//jobs[0][1]=2<=jobs[3][0]=2--yes
+                {
+                last=j;//last=0//last=1//last=0//last=0
+                break;//break//break//bre//break
+                }
+              
+            }
+        
+        if(last!=-1)
+        {
+            profit+=dp[last];//profit+=dp[0]=20+50=70//profit+=dp[1]=100+70=170//profit+=200+50=250
+        }
+        
+        dp[i]=Math.max(dp[i-1],profit);//dp[1]=math.max(70,70)=70 dp[1]=30//dp[2]=math.max(70,170)=170//dp[3]=Math.max(170,250)=250
+    }
+    
+    System.out.println(dp[n-1]);//dp[3]=250
+    }
+}
