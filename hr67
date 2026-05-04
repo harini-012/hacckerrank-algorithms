@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]nums=new int[n];//1 5 11 5
+        for(int i=0;i<n;i++)
+        {
+            nums[i]=sc.nextInt();
+            
+        }
+        int total=0;
+        for(int num:nums)
+        {
+            total+=num;//22
+        }
+        int target=total/2;//11
+        if(total%2!=0)
+        {
+            System.out.println("false");
+            return;
+        }
+        boolean[]dp=new boolean[target+1];//boolean[12]
+        dp[0]=true;
+        for(int num:nums)//1//5//5
+        {
+            for(int j=target;j>=num;j--)//11 >1//10....//1>=1//11...6//11//11--true//10--true//
+            {
+                dp[j]=dp[j]||dp[j-num];//dp[11]=dp[11]||dp[10]--false//dp[10]=dp[10]||dp[9]--false//dp[1]=dp[1]||dp[0]--true//dp[6]=dp[6]||dp[1]--true//dp[5]=dp[5]||dp[0]--true//dp[11]=dp[11]||dp[0]--true
+            }
+        }
+        System.out.println(dp[target]?"true":"false");//true
+        
+    }
+}
