@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();//6
+        int[]prices=new int[n];//10 22 5 75 65 80
+        for(int i=0;i<n;i++)
+        {
+            prices[i]=sc.nextInt();
+        }
+        if(n==0)
+        {
+            System.out.println(0);
+            return;
+        }
+        int buy1=Integer.MIN_VALUE;//-infinity//-10//-10//-5//-5//-5//-5
+        int sell1=0;//0//0//12//12//70//70//75
+        int buy2=Integer.MIN_VALUE;//-infinity//-10//7//7//7//7
+        int sell2=0;//0//0//-10//12//82//82
+        for(int price:prices)//10//22//5//75//65//80
+        {
+            buy1=Math.max(buy1,-price);//max(-infinity,-10)=-10//-10,-22=-10//-10,-5=-5//-5,-75=-5//-5,-65=-5//-5,-80=-5
+            sell1=Math.max(sell1,buy1+price);//max(0,-10+10=0)=0//0,-10+22=12=12//12,-5+5=0=12//12,-5+75=70=70//70,-5+65=60=70//70,-5+80=75
+            buy2=Math.max(buy2,sell1-price);//max(-infinity,0-10)=-10//-10,12-22=-10=-10//-10,12-5=7//7,70-75=-5=7//7,70-65=5=7//7,75-80=-5=7
+            sell2=Math.max(sell2,buy2+price);//max(0,-10+10=0)=0//-10,-10+22=12//12,7+5=12=12//12,7+75=82//82,7+65=72//82,7+80=87
+        }
+        System.out.println(sell2);//87
+    }
+}
