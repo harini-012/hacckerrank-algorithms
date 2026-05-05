@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+/*
+dp[1][1]=1
+dp[1][2]=1
+dp[2][1]=2
+dp[2][2]=3
+dp[3][1]=3
+dp[3][2]=6
+*/
+public class Solution {
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();//2
+        int k=sc.nextInt();//36
+        int[][]dp=new int[k+1][n+1];//[37][3]
+        int moves=0;//0
+        while(dp[moves][n]<k)//dp[0][2]=0<36//dp[1][2]=1<36//dp[3][2]<=36//.....dp[8][2]>36--terminates
+        {
+            moves++;//1//2//3
+            for(int e=1;e<=n;e++)//1<=2//2//1<=2//2//1//2
+            {
+                dp[moves][e]=1+dp[moves-1][e-1]+dp[moves-1][e];//dp[1][1]=1+dp[0][0]+1+dp[0][1]=1+0+0=1//dp[1][2]=1+dp[0][1]+dp[0][2]=1+0+0=1//dp[2][1]=1+dp[1][0]+dp[1][1]=1+0+1=2//dp[2][2]=1+dp[1][1]+dp[1][2]=1+1+1=3//dp[3][1]=1+dp[2][0]+dp[2][1]=1+0+2=3//dp[3][2]=1+dp[2][1]+dp[2][2]=1+2+3=6..continues
+            }
+        }
+        System.out.println(moves);
+        
+    }
+}
