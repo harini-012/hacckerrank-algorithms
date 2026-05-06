@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static String[]map={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    static List<String>result=new ArrayList<>();
+    public static void backtrack(String digits,int index,StringBuilder current)//23,0,""//23,1,a
+    {
+        if(index==digits.length())//0!=2//1!=2
+        {
+            result.add(current.toString());//ad//ae
+            return;
+        }
+        String letters=map[digits.charAt(index)-'0'];//digits.charAt(0)='2'-'0'=50-48=map[2]=abc//map[50-47=3]=def
+        for(char ch:letters.toCharArray())//a//d//e --backtracking continue with b
+        {
+            current.append(ch);//a//ad//ae//af
+            backtrack(digits,index+1,current);//23,1,a//23,2,ad//
+            current.deleteCharAt(current.length()-1);//after base case d deleted current=a//after base e removed//after base f removed//a removed
+            
+        }
+    }
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        String digits=sc.nextLine();//23
+        if(digits.length()==0)
+        {
+            System.out.println("[]");
+            return;
+        }
+        backtrack(digits,0,new StringBuilder());//23,0,""
+        System.out.println(result);
+    }
+}
