@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static List<List<Integer>>result=new ArrayList<>();//[]
+    public static void backtrack(int[]nums,boolean[]used,List<Integer>current)
+        //nums = [1, 2, 3] used = [false, false, false] current = []
+    {
+        if(current.size()==nums.length)
+    {
+        result.add(new ArrayList<>(current));
+        return;
+    }
+    for(int i=0;i<nums.length;i++)//0
+    {
+        if(!used[i])//false
+        {
+            used[i]=true;//used[0]=true
+            current.add(nums[i]);//1
+            backtrack(nums,used,current);//nums = [1, 2, 3] used = [true, false, false] current = [1]
+            current.remove(current.size()-1);//remove 3
+            used[i]=false;//used[2]=false..try backtracking and answer
+        }
+    }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String[]input=sc.nextLine().split(" ");
+        int[]nums=new int[input.length];
+        for(int i=0;i<input.length;i++)
+        {
+            nums[i]=Integer.parseInt(input[i]);
+        }
+        if(nums.length==0)
+        {
+            System.out.println("[]");
+            return;
+        }
+        backtrack(nums,new boolean[nums.length],new ArrayList<>());
+        System.out.println(result);
+    }
+}
