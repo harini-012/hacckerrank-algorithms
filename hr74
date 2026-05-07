@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static List<List<Integer>>result=new ArrayList<>();
+    static void backtrack(int start,int upper,int n,List<Integer>ways)//1,4,2,[]//2,4,2,[1]//3,4,2,[1,2]//4,4,2,[1,3]//5,4,2,[1,4]//3,4,2,[2]//4,4,2,[2,3]//5,4,2,[2,4]//4,4,2,[3]//5,4,2,[3,4]
+    {
+        if(ways.size()==n)//2==2//2==2//2==2
+        {
+            result.add(new ArrayList<>(ways));//result[[1,2]]//result[[1,3]]//result[[1,4]]//result[2,3]//result[2,4]//result[3,4]
+            return;
+        }
+        for(int i=start;i<=upper;i++)//1<=4//2<=4//3<=4//4<=4  ---2//3//4  --3//4
+        {
+            ways.add(i);//[1]//[1,2]//[1,3]//[1,4]//[2]//[2,3]//3//[3,4]
+            backtrack(i+1,upper,n,ways);//2,4,2,[1]//3,4,2,[1,2]//4,4,2,[1,3]//5,4,2,[1,4]//3,4,2,[2]//4,4,2,[2,3]//5,4,2,[2,4]//4,4,2,[3]//5,4,2,[3,4]
+            ways.remove(ways.size()-1);//2 removed [1]//3 removed [1]//4 removed//1 removed in backtracking []//3 remove//4 removed//2 removed//4 removed
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int upper=sc.nextInt();//4
+        int n=sc.nextInt();//2
+        backtrack(1,upper,n,new ArrayList<>());//1,4,2,[]
+        System.out.println(result);
+    }
+}
