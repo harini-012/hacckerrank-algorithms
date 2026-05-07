@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static List<List<Integer>>result=new ArrayList<>();
+    static void findCombinations(int[]arr,int target,int index,List<Integer>current)//[2,3,6,7],7,0,[]//[2,3,6,7],5,0,[2]//[2,3,6,7],3,0,[2,2]//[2,3,6,7],1,0,[2,2,2]//[2,3,6,7],-1,0,[2,2,2,2]
+    {
+        if(target==0)
+        {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        if(target<0)
+        {
+            return;//return since -1
+        }
+        for(int i=index;i<arr.length;i++)//0//0//0//0//1//2//3--backtraking
+        {
+            current.add(arr[i]);//[2]//[2,2]//[2,2,2]//[2,2,2,2]//[2,2,2,3]
+            findCombinations(arr,target-arr[i],i,current);//[2,3,6,7],5,0,[2]//[2,3,6,7],3,0,[2,2]//[2,3,6,7],1,0,[2,2,2]//[2,3,6,7],-1,0,[2,2,2,2]////[2,3,6,7],-1,0,[2,2,2,2]--only negative target
+            current.remove(current.size()-1);//[2,2,2]//[2,2,3]
+        }
+    }
+
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]arr=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+            
+        }
+        int target=sc.nextInt();
+        findCombinations(arr,target,0,new ArrayList<>());
+        System.out.println(result);
+    }
+}
