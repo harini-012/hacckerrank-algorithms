@@ -1,0 +1,69 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int m,n;
+    static char[][]board;
+    static boolean[][]visited;
+    static String word;
+    static int[]dx={1,0,0,-1};
+    static int[]dy={0,-1,1,0};
+    public static boolean backtrack(int x,int y,int index)
+    {
+        if(index==word.length())
+        {
+            return true;
+        }
+        if(x<0||y<0||x>=m||y>=n||visited[x][y]||board[x][y]!=word.charAt(index))
+        {
+            return false;
+        }
+        visited[x][y]=true;
+        for(int i=0;i<4;i++)
+        {
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(backtrack(nx,ny,index+1))
+            {
+                return true;
+            }
+        }
+        visited[x][y]=false;
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        m=sc.nextInt();
+        n=sc.nextInt();
+        sc.nextLine();
+        board=new char[m][n];
+        visited=new boolean[m][n];
+        for(int i=0;i<m;i++)
+        {
+            String row=sc.nextLine();
+            for(int j=0;j<n;j++)
+            {
+                board[i][j]=row.charAt(j);
+            }
+        }
+        word=sc.nextLine();
+        boolean found=false;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(backtrack(i,j,0))
+                {
+                    found=true;
+                    break;
+                }
+            }
+            if(found)
+            {
+                break;
+                
+            }
+        }
+        System.out.println(found);
+        }
+    }
