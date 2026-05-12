@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();//babad
+        String t="#";//#
+        for(int i=0;i<s.length();i++)
+        {
+            t+=s.charAt(i)+"#";//#b#a#b#a#d#
+        }
+        int n=t.length();//10
+        int[]p=new int[n];//
+        int center=0;//0
+        int right=0;//0
+        int maxLen=0;//0
+        int pos=0;//0
+        for(int i=0;i<n;i++)//0//1
+        {
+            int mirror=2*center-i;//0//-1
+            if(i<right)//0<0--no//1<0
+            {
+                p[i]=Math.min(right-i,p[mirror]);
+            }
+            while(i+p[i]+1<n&&i-p[i]-1>=0&&t.charAt(i+p[i]+1)==t.charAt(i-p[i]-1))
+            {
+                p[i]++;
+            }
+            if(i+p[i]>right)
+            {
+                center=i;
+                right=i+p[i];
+            }
+            if(p[i]>maxLen)
+            {
+                maxLen=p[i];
+                pos=i;
+            }
+            
+        }
+        int start=(pos-maxLen)/2;
+        System.out.println(s.substring(start,start+maxLen));
+    }
+}
