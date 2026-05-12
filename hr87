@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int expandAroundCenter(String s,int left,int right)//abc,0,0//abc,0,1//abc,1,1
+    {
+        int count=0;//0//0
+        while(left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right))//a==a//a!=b//
+        {
+            count++;//1
+            left--;//-1
+            right++;//1
+        }
+        return count;//1//0
+    }
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();//abc
+        int n=s.length();//3
+        int result=0;//1+0=1
+        for(int i=0;i<n;i++)//0//1
+        {
+            result+=expandAroundCenter(s,i,i);//abc,0,0//abc(1,1)
+            result+=expandAroundCenter(s,i,i+1);//abc,0,1//abc(1,2)
+        }
+        System.out.println(result);
+    }
+}
