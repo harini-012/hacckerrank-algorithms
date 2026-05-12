@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();//PAYPALISHIRING
+        int n=sc.nextInt();
+        if(n==1||n>=s.length())
+        {
+            System.out.println(s);
+            return;
+        }
+        StringBuilder[]rows=new StringBuilder[n];    //14
+        for(int i=0;i<n;i++)//
+        {
+            rows[i]=new StringBuilder();
+        }
+        int current=0;//0
+        boolean down=true;//true
+        for(int i=0;i<s.length();i++)//0
+        {
+            rows[current].append(s.charAt(i));//rows[0]=P//rows[1]=A   
+            if(current==0)
+            {
+                down=true;//true
+            }
+            else if(current==n-1)
+            {
+                down=false;
+            }
+            
+            if(down)
+            {
+                current++;//1
+            }
+            else
+            {
+                current--;//0
+            }
+            
+        }
+        StringBuilder result=new StringBuilder();
+        for(int i=0;i<n;i++)
+        {
+            result.append(rows[i]);
+            
+        }
+        System.out.println(result.toString());
+}
+}
