@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();//2 bba
+        while(t>0)//2
+        {
+            String s=sc.next();//bba
+            int[]freq=new int[26];//[1,2,0,0.........]
+            for(int i=0;i<s.length();i++)
+            {
+                char ch=s.charAt(i);//b//b//a
+                freq[ch-'a']++;//freq[1]=1//freq[1]=2//freq[0]=1
+                
+            }
+            boolean flag=true;//true
+            for(int i=0;i<26;i++)//0//1
+            {
+                if (freq[i]>0)//freq[0]=1>0//freq[1]=2>0//freq[2]>0--no
+                {
+                    int value=i+1;//1//2
+                    if(freq[i]!=value)//1=1//2=2
+                    {
+                        flag=false;
+                        break;
+                    }
+                }
+            }
+            if(flag)
+            {
+                System.out.println("YES");//yes
+            }
+            else
+            {
+                System.out.println("NO");
+            }
+            t--;
+            
+        }
+    }
+}
