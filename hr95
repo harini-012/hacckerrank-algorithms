@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();//3+2*2
+        int result=0;
+        int current=0;//3
+        int num=0;//3
+        char op='+';
+        for(int i=0;i<s.length();i++)//0<5//1<5//2<5//3<5//4<5
+        {
+            char ch=s.charAt(i);
+            if(ch == ' ')
+            {
+                continue;
+            }
+            if(Character.isDigit(ch))//3//+//2//*//2
+            {
+                num=num*10+(ch-'0');//3//2//2
+            }
+            if(!Character.isDigit(ch)||i==s.length()-1)
+            {
+                if(op=='+')
+                {
+                    result=result+current;//0//3
+                    current=num;//3//2
+                }
+                else if(op=='-')
+                {
+                    result=result+current;
+                    current=-num;
+                }
+                else if(op=='*')
+                {
+                    current=current*num;//4
+                }
+                else if(op=='/')
+                {
+                    current=current/num;
+                }
+                op=ch;//+/*
+                num=0;//0//0
+            }
+        }
+        result=result+current;//4+3=7
+        System.out.println(result);
+    }
+}
