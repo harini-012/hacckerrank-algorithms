@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        String binary=Integer.toBinaryString(x);
+        int i=0;
+        int j=binary.length()-1;
+        boolean isPalindrome=true;
+        while(i<j)
+        {
+            if(binary.charAt(i)!=binary.charAt(j))
+            {
+                isPalindrome=false;
+                break;
+            }
+            i++;
+            j--;
+        }
+        System.out.println(isPalindrome);
+    }
+}
